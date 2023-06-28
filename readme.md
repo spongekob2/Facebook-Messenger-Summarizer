@@ -7,5 +7,10 @@ You leave the conversation with the bros for 5 minutes and when you come back yo
 For now, only on Firefox. [Why should you use Firefox ?](https://www.quora.com/What-are-the-major-reasons-to-use-Firefox-instead-of-Chrome?share=1)
 
 
-## Useful link
+## Useful links
 - https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions
+
+## TODO
+- Use the OpenAI API to summarize the conversation
+- Fix typos
+- Use parameters to give user more control
