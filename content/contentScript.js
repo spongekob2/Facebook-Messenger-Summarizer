@@ -5,14 +5,13 @@
 var messages = [];
 
 browser.runtime.onMessage.addListener((request) => {
+    messages = [];
     scrapeMessages();
-  return Promise.resolve({ response: "Hi from content script" });
+  return Promise.resolve({ messages: messages });
 });
 
 
 function scrapeMessages() {
-  // Votre code de scrapping ici
-    console.log("ca part.")
     var regex = /reply/i;
     var messageElements = document.querySelectorAll('[role="row"]');
     var filteredElements = Array.from(messageElements).filter(function(element) {
@@ -22,7 +21,6 @@ function scrapeMessages() {
         getLastDescendantWithoutChild(element);
         
     });
-    console.log(messages)
 
 }
 
