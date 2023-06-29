@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   scrapButton.addEventListener('click', function() {
     getConversationFromDom
     .then(conversation => {
-      let prompt = promptInstruction + `\nConversation :\n"""${conversation}"""\n` + promptInstructionEnd;
+      let prompt = promptInstruction + `\n"""${conversation}"""\n` + promptInstructionEnd;
       
       fetch(apiUrl, {
         'method': 'POST',
