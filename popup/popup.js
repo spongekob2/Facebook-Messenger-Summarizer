@@ -1,7 +1,11 @@
-let apiKey = "";
+let apiUrl, apiKey, model, promptInstruction, promptInstructionEnd;
 
 loadConfig().then(config => {
-  apiKey = config.apiKey; // Utilisation de la clé API chargée depuis le fichier de configuration
+  apiUrl = config.apiUrl;
+  apiKey = config.apiKey;
+  model = config.model;
+  promptInstruction = config.promptInstruction;
+  promptInstructionEnd = config.promptInstructionEnd;
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,11 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
   scrapButton.addEventListener('click', function() {
     getConversationFromDom
     .then(conversation => {
-      let prompt = `Ton rôle est de fournir un résumé de la conversation Facebook Messenger donnée entre six guillemets. Résume cette conversation sous forme de bullet point pour faire rendre compte des sujets de discussion, des débats, des idées. Ne rentre pas dans les détails.\nConversation :\n"""${conversation}"""\nFin de la conversation.`;
-      let model = "gpt-3.5-turbo";
+      let prompt = promptInstruction + `\nConversation :\n"""${conversation}"""\n` + promptInstructionEnd;
       
-      let url = "https://api.openai.com/v1/chat/completions";
-      fetch(url, {
+      fetch(apiUrl, {
         'method': 'POST',
         'headers': {
           'Content-Type': 'application/json',

@@ -1,3 +1,7 @@
 {
-    "apiKey": "YOUR_API_KEY"
+    "apiUrl" : "https://api.openai.com/v1/chat/completions",
+    "apiKey": "YOUR_API_KEY",
+    "model": "gpt-3.5-turbo",
+    "promptInstruction":  "Ton rôle est de fournir un résumé de la conversation Facebook Messenger donnée entre six guillemets. Résume cette conversation sous forme de bullet point pour faire rendre compte des sujets de discussion, des débats, des idées. Ne rentre pas dans les détails.",
+    "promptInstructionEnd" : "Fin de la conversation."
 }
