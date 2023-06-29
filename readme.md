@@ -13,3 +13,4 @@ For now, only on Firefox. [Why should you use Firefox ?](https://www.quora.com/W
 ## TODO
 - Fix typos
 - Use parameters to give user more control
+- change icon for a more revelant one
