@@ -11,6 +11,5 @@ For now, only on Firefox. [Why should you use Firefox ?](https://www.quora.com/W
 - https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions
 
 ## TODO
-- Use the OpenAI API to summarize the conversation
 - Fix typos
 - Use parameters to give user more control
