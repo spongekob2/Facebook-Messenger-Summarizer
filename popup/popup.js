@@ -9,13 +9,15 @@ loadConfig().then(config => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  let scrapButton = document.getElementById('summarizeButton');
-  scrapButton.addEventListener('click', function() {
+  let summarizeButton = document.getElementById('summarizeButton');
+  let summaryTextArea = document.getElementById('summaryTextArea');
+  summarizeButton.addEventListener('click', function() {
+    summarizeButton.children[0].style.display = "none";
+    summarizeButton.children[1].style.display = "inline-block";
     getConversationFromDom
     .then(conversation => {
       let prompt = promptInstruction + `\n"""${conversation}"""\n` + promptInstructionEnd;
-      
-      fetch(apiUrl, {
+      return fetch(apiUrl, {
         'method': 'POST',
         'headers': {
           'Content-Type': 'application/json',
@@ -26,14 +28,24 @@ document.addEventListener('DOMContentLoaded', function() {
           "messages": [{"role" : "system", "content" : prompt}]
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        let summary = data.choices[0].message.content; 
-        document.getElementById('summaryTextArea').value = summary;
-      })
-      .catch(error => {
-        document.getElementById('summaryTextArea').value = "An error occured.";
-      });
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.choices){
+        return data.choices[0].message.content;
+      }
+      else if (data.error){
+        return data.error.message
+      }
+      else {
+        return "An error occured."
+      }
+    })
+    .then(message => summaryTextArea.value = message)
+    .catch(error => summaryTextArea.value = error.message)
+    .finally(() => {
+      summarizeButton.children[0].style.display = "inline-block";
+      summarizeButton.children[1].style.display = "none";
     });
   });
 });
@@ -59,7 +71,6 @@ const getConversationFromDom = new Promise((resolve, reject) => {
     .then(resp => {
       let messages = resp.messages;
       let conversation = [];
-      let conversationString = [];
 
       let currentLine = [];
       for (let msg of messages) {
@@ -73,6 +84,7 @@ const getConversationFromDom = new Promise((resolve, reject) => {
       }
       conversation.push(currentLine)
       resolve(conversation.join("\n"))
-    });
+    })
+    .catch(error => reject(error));
   })
 })
