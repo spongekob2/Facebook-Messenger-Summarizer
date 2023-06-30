@@ -1,12 +1,15 @@
 let apiUrl, apiKey, model, promptInstruction, promptInstructionEnd;
 
-loadConfig().then(config => {
-  apiUrl = config.apiUrl;
-  apiKey = config.apiKey;
-  model = config.model;
-  promptInstruction = config.promptInstruction;
-  promptInstructionEnd = config.promptInstructionEnd;
-});
+loadConfig()
+  .then(config => {
+    apiUrl = config.apiUrl;
+    model = config.model;
+    promptInstruction = config.promptInstruction;
+    promptInstructionEnd = config.promptInstructionEnd;
+
+    
+  })
+  .then(() => browser.storage.local.get("apiKey", (items) => {apiKey = items.apiKey}))
 
 document.addEventListener('DOMContentLoaded', function() {
   let summarizeButton = document.getElementById('summarizeButton');
