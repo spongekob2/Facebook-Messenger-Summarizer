@@ -23,3 +23,4 @@ For now, only on Firefox. [Why should you use Firefox ?](https://www.quora.com/W
 - Use parameters to give user more control
 - change icon for a more revelant one
 - Make extension not openable if the active tab is not messenger.com
+- Make a Chrome version of the extension.
