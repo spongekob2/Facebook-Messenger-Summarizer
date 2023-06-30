@@ -11,7 +11,7 @@ body {
 }
 
 h1 {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 label {
@@ -19,9 +19,7 @@ label {
     margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="number"],
-select {
+input[type="text"]{
     width: 100%;
     padding: 5px;
     font-size: 14px;
@@ -30,6 +28,7 @@ select {
 
 textarea {
     width: 100%;
+    margin-bottom: 14px;
     height: 200px;
     resize: none;
     box-sizing: border-box;
@@ -62,4 +61,11 @@ button:active {
 #summarizeButton>i {
     display: none;
     margin-left: 8px;
+}
+
+#configuration {
+    text-align: right;
+}
+#configuration>a:link{
+    text-decoration: none;
 }
