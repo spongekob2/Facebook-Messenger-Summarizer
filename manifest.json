@@ -25,6 +25,10 @@
   "web_accessible_resources": [
     "styles/styles.css"
   ],
+  "browser_specific_settings": {
+  "gecko": {
+    "id": "fd-messenger-summarizer@spongekob2.io"}
+  },
   "permissions": [
     "tabs",
     "activeTab",
