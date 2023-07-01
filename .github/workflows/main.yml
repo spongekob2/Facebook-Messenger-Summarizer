@@ -1,9 +1,10 @@
+name: "Release"
 on:
   workflow_dispatch:
     
 jobs:
-  build:
-    name: "Build"
+  sign:
+    name: "Release"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
@@ -15,11 +16,21 @@ jobs:
         with:
           cmd: build
           source: .
-          filename: "{name}-{version}.xpi"
-          ignoreFiles: '[ "package.json","package-lock.json","yarn.lock" ]'
 
-      - name: "Upload Artifact"
-        uses: actions/upload-artifact@v3
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
         with:
-          name: target.xpi
-          path: ${{ steps.web-ext-build.outputs.target }}
+          cmd: sign
+          source: ${{ steps.web-ext-build.outputs.target }}
+          channel: unlisted
+          apiKey: ${{ secrets.AMO_SIGN_KEY }}
+          apiSecret: ${{ secrets.AMO_SIGN_SECRET }}
+          timeout: 900000
+
+      - name: "Create Release"
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: ${{ steps.web-ext-sign.outputs.target }}
